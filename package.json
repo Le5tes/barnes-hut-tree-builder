@@ -1,0 +1,14 @@
+{
+  "name": "barnes-hut-tree-builder",
+  "version": "1.0.0",
+  "description": "A module to build quadtrees for the barnes-hut algorithm with high performance, implemented using WebAssembly",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim Williamson",
+  "license": "ISC"
+}
