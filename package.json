@@ -2,14 +2,27 @@
   "name": "barnes-hut-tree-builder",
   "version": "1.0.0",
   "description": "A module to build quadtrees for the barnes-hut algorithm with high performance, implemented using WebAssembly",
-  "main": "index.js",
+  "main": "js/src/main.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test-core": "sh ./scripts/test-core.sh"
+    "test-core": "sh ./scripts/test-core.sh",
+    "test-wrapper": "jest"
   },
   "author": "Tim Williamson",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/node": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babel-jest": "^24.9.0",
+    "babel-polyfill": "^6.26.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^24.9.0"
+  }
 }
