@@ -3,5 +3,5 @@
 #include "test-tree-builder.cpp"
 
 TEST_CASE("test test!") {
-    REQUIRE(1 == 2);
+    REQUIRE(1 == 1);
 }

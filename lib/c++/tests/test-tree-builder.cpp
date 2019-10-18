@@ -1,13 +1,12 @@
 #include "catch.hpp"
 #include "../src/tree-builder.h"
 
-TEST_CASE("TreeBuilder.build should return a pointer to an array") {
+TEST_CASE("TreeBuilder.build, when called with a single body, should return an array with a single node with reference to that body") {
     TreeBuilder treeBuilder;
-    double *arr = treeBuilder.build();
-    double exp[] = {3.0};
-    REQUIRE(arr[0] == exp[0]);
-}
-
-TEST_CASE("TreeBuilder.build should throw an error if the pointer is already assigned") {
+    double (*bodies)[5] =  new double[1][5]{{10.0,10.0,100.0,0.0,0.0}};
     
+    double *result = treeBuilder.build(bodies);
+
+    REQUIRE(result);
+    REQUIRE(*result == 10.0);
 }

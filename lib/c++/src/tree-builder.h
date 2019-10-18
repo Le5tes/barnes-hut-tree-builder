@@ -5,16 +5,17 @@ class TreeBuilder {
             tree = 0;
         }
         
-        double *build() {
-            cleanup();
+        double *build(double bodies[][5]) {
+            cleanUp();
             
-            tree = new double[1]; 
-            tree[0] = 3.0;
-            return tree;
+            tree = new double[1][10]; 
+            tree[0][0] = bodies[0][0];
+            double *returnVal = &tree[0][0];
+            return returnVal;
         }
 
     private:
-        double *tree;
+        double (*tree)[10];
         
         void cleanUp() {
             delete tree;
