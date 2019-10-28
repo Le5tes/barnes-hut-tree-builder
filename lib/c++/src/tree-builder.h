@@ -1,18 +1,14 @@
+#ifndef TREE_BUILDER_H
+#define TREE_BUILDER_H
+#include "body.h"
+
 class TreeBuilder {
-    
     public:
         TreeBuilder () {
             tree = 0;
         }
         
-        double *build(double bodies[][5]) {
-            cleanUp();
-            
-            tree = new double[1][10]; 
-            tree[0][0] = bodies[0][0];
-            double *returnVal = &tree[0][0];
-            return returnVal;
-        }
+        double *build(Body *bodies, int length);
 
     private:
         double (*tree)[10];
@@ -22,3 +18,5 @@ class TreeBuilder {
             tree = 0;
         }
 };
+
+#endif

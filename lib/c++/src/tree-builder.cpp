@@ -1,16 +1,16 @@
 #include "tree-builder.h"
-#include <emscripten/bind.h>
-using namespace emscripten;
+#include "body.h"
+
+double* TreeBuilder::build(Body bodies[], int length) {
+            cleanUp();
+
+            tree = new double[1][10];
+            tree[0][0] = bodies[0].posX;
+            double *returnVal = &tree[0][0];
+            return returnVal;
+        }
 
 TreeBuilder getTreeBuilder() {
     TreeBuilder treeBuilder;
     return treeBuilder;
-}
-
-EMSCRIPTEN_BINDINGS(my_module) {
-    function("getTreeBuilder", &getTreeBuilder);
-
-    class_<TreeBuilder>("TreeBuilder")
-    .constructor<>()
-    .function("build", &TreeBuilder::build, allow_raw_pointers());
 }
