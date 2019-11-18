@@ -1,6 +1,7 @@
 #ifndef TREE_BUILDER_H
 #define TREE_BUILDER_H
-#include "body.h"
+
+typedef int doublePtr_t;
 
 class TreeBuilder {
     public:
@@ -8,11 +9,19 @@ class TreeBuilder {
             tree = 0;
         }
         
-        double *build(Body *bodies, int length);
+        doublePtr_t build(doublePtr_t bodies, int length);
+
+        double *build(double* bodies, int length);
+
+        int getTreeLength() {
+            return treeLength;
+        }
 
     private:
         double (*tree)[10];
         
+        int treeLength;
+
         void cleanUp() {
             delete tree;
             tree = 0;
