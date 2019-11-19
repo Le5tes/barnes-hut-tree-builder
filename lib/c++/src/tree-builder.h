@@ -9,16 +9,16 @@ class TreeBuilder {
             tree = 0;
         }
         
-        doublePtr_t build(doublePtr_t bodies, int length);
+        doublePtr_t build(doublePtr_t bodies, int noOfBodies, double width, double cornerX, double cornerY);
 
-        double *build(double* bodies, int length);
+        double *build(double* bodies, int noOfBodies, double width, double cornerX, double cornerY);
 
         int getTreeLength() {
             return treeLength;
         }
 
     private:
-        double (*tree)[10];
+        double (*tree)[12];
         
         int treeLength;
 
