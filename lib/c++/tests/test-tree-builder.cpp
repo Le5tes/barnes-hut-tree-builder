@@ -39,3 +39,41 @@ TEST_CASE("TreeBuilder.build, when called with a single body, should return an a
         REQUIRE(*(result + 11) == -1.0);
     }
 }
+
+TEST_CASE("TreeBuilder.build, when called with two bodies, should return an array with five nodes") {
+    TreeBuilder treeBuilder;
+    double *bodies = new double[6]{10.0,11.0,100.0, 10.0,25.0,-100.0};
+    double *result = treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0);
+
+    SECTION("Parent Node") {
+        SECTION("Has no parent") {
+            REQUIRE(*(result + 6) == -1.0);
+        }
+
+        SECTION("Has 4 children") {
+            REQUIRE(*(result + 8) == 1.0);
+            REQUIRE(*(result + 9) == 2.0);
+            REQUIRE(*(result + 10) == 3.0);
+            REQUIRE(*(result + 11) == 4.0);
+        } 
+
+        SECTION("has no body attached to it") {
+            REQUIRE(*(result + 7) == -1.0);
+        }
+
+        SECTION("has width the same as passed in") {
+            REQUIRE(*(result + 3) == 3000.0);
+        }
+
+        SECTION("has corner position the same as passed in") {
+            REQUIRE(*(result + 4) == -1500.0);
+            REQUIRE(*(result + 5) == -1500.0);
+        }
+
+        SECTION("has centre of mass created by amalgamating the two bodies") {
+            REQUIRE(*result == 20.0);
+            REQUIRE(*(result + 1) == 18.0);
+            REQUIRE(*(result + 2) == 0.0);
+        }
+    }
+}
