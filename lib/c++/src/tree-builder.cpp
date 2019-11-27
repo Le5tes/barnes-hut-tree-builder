@@ -1,24 +1,20 @@
 #include "tree-builder.h"
 #include "body-array.h"
+#include "tree/tree.cpp"
 
 double* TreeBuilder::build(double* bodies, int noOfBodies, double width, double cornerX, double cornerY) {
     cleanUp();
 
     BodyArray bodyArray = BodyArray(bodies);
 
-    tree = new double[1][12];
-    tree[0][0] = bodyArray.mass(0);
-    tree[0][1] = bodyArray.posX(0);
-    tree[0][2] = bodyArray.posY(0);
-    tree[0][3] = width;
-    tree[0][4] = cornerX;
-    tree[0][5] = cornerY;
-    tree[0][6] = -1.0;
-    tree[0][7] = 0.0;
-    tree[0][8] = -1.0;
-    tree[0][9] = -1.0;
-    tree[0][10] = -1.0;
-    tree[0][11] = -1.0;
+    tree = new double[noOfBodies * 10][12];
+    
+    Tree treeContainer = Tree(tree, bodyArray);
+    treeContainer.setupNode(0, -1, width, cornerX, cornerY);
+    
+    for (int i = 0; i < noOfBodies; i++) {
+        treeContainer.addBody(0, 0.0);
+    }
 
     double *returnVal = &tree[0][0];
     return returnVal;

@@ -26,6 +26,8 @@ class TreeBuilder {
             delete tree;
             tree = 0;
         }
+        
+        void addBody(double nodeAddr, double bodyAddr);
 };
 
 #endif
