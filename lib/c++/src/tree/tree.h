@@ -18,6 +18,8 @@ class Tree {
         
         BodyArray &bodies;
         
+        void addToCorrectSubnode(int body, int index);
+        bool isInsideNode( int nodeIndex, int bodyIndex);
         bool hasNoSubnodes(int index);
         void createSubnodes(int index);
 };

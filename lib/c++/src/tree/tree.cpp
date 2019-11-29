@@ -1,20 +1,41 @@
 #include "tree.h"
 
 void Tree::addBody(int index, int body) {
-    if (nodeArray.bodyAddr(index) == -1.0 && hasNoSubnodes(index)) {
+    if (nodeArray.bodyAddr(index) == -1 && hasNoSubnodes(index)) {
         nodeArray.setBodyAddr(body, index);
         nodeArray.setPosX(bodies.posX(body), index);
         nodeArray.setPosY(bodies.posY(body), index);
         nodeArray.setMass(bodies.mass(body), index);
     } else {
-        if (nodeArray.bodyAddr(index) != -1.0) {
+        if (nodeArray.bodyAddr(index) != -1) {
             createSubnodes(index);
             // add old body to subnode
+            addToCorrectSubnode(nodeArray.bodyAddr(index), index);
             nodeArray.setBodyAddr(-1, index);
         }
         // add new body to subnode
+        addToCorrectSubnode(body, index);
     }
 };
+
+void Tree::addToCorrectSubnode(int body, int index) {
+    if (isInsideNode(nodeArray.subnode1Addr(index), body)) {
+        addBody(nodeArray.subnode1Addr(index), body);
+    } else if (isInsideNode(nodeArray.subnode2Addr(index), body)) {
+        addBody(nodeArray.subnode2Addr(index), body);
+    } else if (isInsideNode(nodeArray.subnode3Addr(index), body)) {
+        addBody(nodeArray.subnode3Addr(index), body);
+    } else if (isInsideNode(nodeArray.subnode4Addr(index), body)) {
+        addBody(nodeArray.subnode4Addr(index), body);
+    }
+}
+
+bool Tree::isInsideNode(int nodeIndex, int bodyIndex) {
+    return bodies.posX(bodyIndex) >= nodeArray.cornerX(nodeIndex)
+       && bodies.posX(bodyIndex) < nodeArray.cornerX(nodeIndex) + nodeArray.width(nodeIndex) 
+       && bodies.posY(bodyIndex) >= nodeArray.cornerY(nodeIndex)
+       && bodies.posY(bodyIndex) < nodeArray.cornerY(nodeIndex) + nodeArray.width(nodeIndex) ;
+}
 
 void Tree::createSubnodes(int index) {
     const double _width = nodeArray.width(index) / 2;

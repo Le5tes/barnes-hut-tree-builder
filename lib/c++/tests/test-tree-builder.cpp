@@ -43,7 +43,7 @@ TEST_CASE("TreeBuilder.build, when called with a single body, should return an a
 TEST_CASE("TreeBuilder.build, when called with two bodies, should return an array with five nodes") {
     TreeBuilder treeBuilder;
 
-    double *bodies = new double[6]{10.0,11.0,100.0, 10.0,25.0,-100.0};
+    double *bodies = new double[6]{10.0,11.0,100.0, -10.0,25.0,100.0};
     double *result = treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0);
     
     SECTION("Parent node"){
@@ -72,9 +72,27 @@ TEST_CASE("TreeBuilder.build, when called with two bodies, should return an arra
         }
     
         SECTION("has centre of mass created by amalgamating the two bodies") {
-            REQUIRE(*result == 20.0);
+            REQUIRE(*result == 0.0);
             REQUIRE(*(result + 1) == 18.0);
-            REQUIRE(*(result + 2) == 0.0);
+            REQUIRE(*(result + 2) == 200.0);
+        }
+    }
+    
+    SECTION("child nodes") {
+        SECTION("first child should have no body") {
+            REQUIRE(*(result+19) == -1.0);
+        }
+        
+        SECTION("second child should have no body") {
+            REQUIRE(*(result+31) == -1.0);
+        }
+        
+        SECTION("third child should have the second body") {
+            REQUIRE(*(result+43) == 1.0);
+        }
+        
+        SECTION("fourth child should have the first body") {
+            REQUIRE(*(result+55) == 0.0);
         }
     }
 }
