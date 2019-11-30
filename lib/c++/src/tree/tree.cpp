@@ -9,12 +9,11 @@ void Tree::addBody(int index, int body) {
     } else {
         if (nodeArray.bodyAddr(index) != -1) {
             createSubnodes(index);
-            // add old body to subnode
             addToCorrectSubnode(nodeArray.bodyAddr(index), index);
             nodeArray.setBodyAddr(-1, index);
         }
-        // add new body to subnode
         addToCorrectSubnode(body, index);
+        calculateCentreOfMass(index);
     }
 };
 
@@ -37,6 +36,32 @@ bool Tree::isInsideNode(int nodeIndex, int bodyIndex) {
        && bodies.posY(bodyIndex) < nodeArray.cornerY(nodeIndex) + nodeArray.width(nodeIndex) ;
 }
 
+void Tree::calculateCentreOfMass(int index) {
+    const int subnode1 = nodeArray.subnode1Addr(index);
+    const int subnode2 = nodeArray.subnode2Addr(index);
+    const int subnode3 = nodeArray.subnode3Addr(index);
+    const int subnode4 = nodeArray.subnode4Addr(index);
+    
+    const double mass = nodeArray.mass(subnode1)
+     + nodeArray.mass(subnode2)
+     + nodeArray.mass(subnode3)
+     + nodeArray.mass(subnode4);
+     
+    const double positionX = (nodeArray.mass(subnode1) * nodeArray.posX(subnode1)
+     + nodeArray.mass(subnode2) * nodeArray.posX(subnode2)
+     + nodeArray.mass(subnode3) * nodeArray.posX(subnode3)
+     + nodeArray.mass(subnode4) * nodeArray.posX(subnode4)) / mass;
+     
+     const double positionY = (nodeArray.mass(subnode1) * nodeArray.posY(subnode1)
+     + nodeArray.mass(subnode2) * nodeArray.posY(subnode2)
+     + nodeArray.mass(subnode3) * nodeArray.posY(subnode3)
+     + nodeArray.mass(subnode4) * nodeArray.posY(subnode4)) / mass;
+     
+    nodeArray.setMass(mass, index); 
+    nodeArray.setPosX(positionX, index);
+    nodeArray.setPosY(positionY, index);
+}
+
 void Tree::createSubnodes(int index) {
     const double _width = nodeArray.width(index) / 2;
     const double _cornerX = nodeArray.cornerX(index);
@@ -56,6 +81,7 @@ void Tree::createSubnodes(int index) {
 };
 
 void Tree::setupNode(int index, int parentIndex, double _width, double cX, double cY) {
+    nodeArray.setMass(0.0, index);
     nodeArray.setParentAddr(parentIndex, index);
     nodeArray.setWidth(_width, index);
     nodeArray.setCornerX(cX, index);

@@ -22,6 +22,7 @@ class Tree {
         bool isInsideNode( int nodeIndex, int bodyIndex);
         bool hasNoSubnodes(int index);
         void createSubnodes(int index);
+        void calculateCentreOfMass(int index);
 };
 
 #endif
