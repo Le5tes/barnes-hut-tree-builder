@@ -43,7 +43,7 @@ TEST_CASE("TreeBuilder.build, when called with a single body, should return an a
 TEST_CASE("TreeBuilder.build, when called with two bodies, should return an array with five nodes") {
     TreeBuilder treeBuilder;
 
-    double *bodies = new double[6]{10.0,11.0,100.0, -10.0,25.0,100.0};
+    double *bodies = new double[6]{10.0, 11.0, 100.0, -10.0, 25.0, 100.0};
     double *result = treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0);
     
     SECTION("Parent node"){
@@ -95,4 +95,12 @@ TEST_CASE("TreeBuilder.build, when called with two bodies, should return an arra
             REQUIRE(*(result+55) == 0.0);
         }
     }
+}
+
+TEST_CASE("TreeBuilder.build, when called with two bodies with the same position should handle gracefully!") {
+    TreeBuilder treeBuilder;
+    
+    double *bodies = new double[6]{10.0, 11.0, 100.0, 10.0, 11.0, 101.0};
+
+    REQUIRE_NOTHROW(treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0));
 }

@@ -8,14 +8,24 @@ void Tree::addBody(int index, int body) {
         nodeArray.setMass(bodies.mass(body), index);
     } else {
         if (nodeArray.bodyAddr(index) != -1) {
-            createSubnodes(index);
-            addToCorrectSubnode(nodeArray.bodyAddr(index), index);
+            if (isSamePosition(nodeArray.bodyAddr(index), body)) {
+                createIdenticalSubnodes(index);
+                addBody(nodeArray.subnode2Addr(index), nodeArray.bodyAddr(index));
+            } else {
+                createSubnodes(index);
+                addToCorrectSubnode(nodeArray.bodyAddr(index), index);
+            }
             nodeArray.setBodyAddr(-1, index);
         }
         addToCorrectSubnode(body, index);
         calculateCentreOfMass(index);
     }
 };
+
+bool Tree::isSamePosition(int body1, int body2) {
+    return bodies.posX(body1) == bodies.posX(body2) 
+        && bodies.posY(body1) == bodies.posY(body2);
+}
 
 void Tree::addToCorrectSubnode(int body, int index) {
     if (isInsideNode(nodeArray.subnode1Addr(index), body)) {
@@ -80,7 +90,26 @@ void Tree::createSubnodes(int index) {
     setupNode(nodeArray.subnode4Addr(index), index, _width, _cornerX + _width, _cornerY + _width);
 };
 
+void Tree::createIdenticalSubnodes(int index) {
+    const double _width = nodeArray.width(index);
+    const double _cornerX = nodeArray.cornerX(index);
+    const double _cornerY = nodeArray.cornerY(index);
+
+    nodeArray.setSubnode1Addr(nodeArray.nextAvailable(), index);
+    setupNode(nodeArray.subnode1Addr(index), index, _width, _cornerX, _cornerY);
+
+    nodeArray.setSubnode2Addr(nodeArray.nextAvailable(), index);
+    setupNode(nodeArray.subnode2Addr(index), index, _width, _cornerX, _cornerY);
+    
+    nodeArray.setSubnode3Addr(nodeArray.nextAvailable(), index);
+    setupNode(nodeArray.subnode3Addr(index), index, _width, _cornerX, _cornerY);
+    
+    nodeArray.setSubnode4Addr(nodeArray.nextAvailable(), index);
+    setupNode(nodeArray.subnode4Addr(index), index, _width, _cornerX, _cornerY);
+};
+
 void Tree::setupNode(int index, int parentIndex, double _width, double cX, double cY) {
+    std::cout << index << " | "<< parentIndex << std::endl;
     nodeArray.setMass(0.0, index);
     nodeArray.setParentAddr(parentIndex, index);
     nodeArray.setWidth(_width, index);

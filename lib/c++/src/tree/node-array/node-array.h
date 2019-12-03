@@ -3,7 +3,9 @@
 
 class NodeArray {
     public:
-        NodeArray(double nodes[][12]): _nodes(nodes) {};
+        NodeArray(double nodes[][12]): _nodes(nodes) {
+            _nextAvailable = 0;
+        };
 
         double posX(int index) { return _nodes[index][0]; };
         
