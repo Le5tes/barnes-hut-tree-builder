@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "sh ./scripts/test-all.sh",
     "test-core": "sh ./scripts/test-core.sh",
     "build-core": "sh ./scripts/build-core.sh",
     "test-wrapper": "jest"
