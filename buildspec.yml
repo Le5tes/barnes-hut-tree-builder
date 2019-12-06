@@ -1,11 +1,13 @@
-version: 0.1
+version: 0.2
 
 phases:
     build:
-        - npm run build-core
-    test:
-        - npm run test-all
-    publish_to_npm:
-        - echo "not yet implemented"
-    post_actions:
-        - echo "not yet implemented"
+        commands:
+            - echo "compile core" 
+            - npm run build-core
+            - echo "run tests"
+            - npm run test-all
+            - echo "publish to npm -not yet implemented"
+    post_build:
+        commands: 
+            - echo "update version -not yet implemented"
