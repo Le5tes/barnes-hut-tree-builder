@@ -10,7 +10,7 @@ phases:
             - cd emsdk
             - ./emsdk install latest
             - ./emsdk activate latest
-            - source ./emsdk_env.sh
+            - . ./emsdk_env.sh
     pre_build:
         commands: 
             - npm i
