@@ -4,6 +4,13 @@ phases:
     install:
         runtime-versions:
             nodejs: 12
+        commands: 
+            - echo "get emsdk"
+            - git clone https://github.com/emscripten-core/emsdk.git
+            - cd emsdk
+            - ./emsdk install latest
+            - ./emsdk activate latest
+            - source ./emsdk_env.sh
     pre_build:
         commands: 
             - npm i
@@ -12,7 +19,7 @@ phases:
             - echo "compile core" 
             - npm run build-core
             - echo "run tests"
-            - npm run test-all
+            - npm test
             - echo "publish to npm -not yet implemented"
     post_build:
         commands: 
