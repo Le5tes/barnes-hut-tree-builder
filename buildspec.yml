@@ -7,7 +7,11 @@ phases:
         commands: 
             - echo "get emsdk"
             - git clone https://github.com/emscripten-core/emsdk.git
-            - cd emsdk && ./emsdk install latest && ./emsdk activate latest && pwd && ls && . ./emsdk_env.sh
+            - cd emsdk && ./emsdk install latest && ./emsdk activate latest
+            - CURDIR=$(pwd)
+            - PATH="${PATH}:${CURDIR}:${CURDIR}/upstream/emscripten:${CURDIR}/node/12.9.1_64bit/bin"
+            - export $PATH
+            - cd ..
     pre_build:
         commands: 
             - npm i
