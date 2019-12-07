@@ -10,7 +10,7 @@ phases:
             - cd emsdk && ./emsdk install latest && ./emsdk activate latest
             - CURDIR=$(pwd)
             - PATH="${PATH}:${CURDIR}:${CURDIR}/upstream/emscripten:${CURDIR}/node/12.9.1_64bit/bin"
-            - export $PATH
+            - export PATH
             - cd ..
     pre_build:
         commands: 
