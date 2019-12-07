@@ -7,7 +7,7 @@ phases:
         commands: 
             - echo "get emsdk"
             - git clone https://github.com/emscripten-core/emsdk.git
-            - cd emsdk && ./emsdk install latest && ./emsdk activate latest && . ./emsdk_env.sh
+            - cd emsdk && ./emsdk install latest && ./emsdk activate latest && pwd && ls && . ./emsdk_env.sh
     pre_build:
         commands: 
             - npm i
