@@ -109,7 +109,6 @@ void Tree::createIdenticalSubnodes(int index) {
 };
 
 void Tree::setupNode(int index, int parentIndex, double _width, double cX, double cY) {
-    std::cout << index << " | "<< parentIndex << std::endl;
     nodeArray.setMass(0.0, index);
     nodeArray.setParentAddr(parentIndex, index);
     nodeArray.setWidth(_width, index);
