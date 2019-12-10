@@ -6,12 +6,14 @@ phases:
             nodejs: 12
         commands: 
             - echo "get emsdk"
+            - cd ..
             - git clone https://github.com/emscripten-core/emsdk.git
             - cd emsdk && ./emsdk install latest && ./emsdk activate latest
             - CURDIR=$(pwd)
             - PATH="${PATH}:${CURDIR}:${CURDIR}/upstream/emscripten:${CURDIR}/node/12.9.1_64bit/bin"
             - export PATH
             - cd ..
+            - cd barnes-hut-tree-builder
     pre_build:
         commands: 
             - npm i
