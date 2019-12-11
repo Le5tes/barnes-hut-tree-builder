@@ -23,7 +23,9 @@ phases:
             - npm run build-core
             - echo "run tests"
             - npm test
-            - echo "publish to npm -not yet implemented"
+            - if [ ! -d "~/.npmrc" ]; then touch ~/.npmrc; fi 
+            - echo "//registry.npmjs.org/:_authToken=${npm-token}" >> ~/.npmrc2
+            - npm publish
     post_build:
         commands: 
             - echo "update version -not yet implemented"

@@ -1,0 +1,6 @@
+lib/c++
+scripts
+
+.DS_Store
+node_modules
+a.out
