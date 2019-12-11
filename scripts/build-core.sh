@@ -3,7 +3,7 @@ if which emcc ; then
       mkdir lib/js/core
     fi
 
-    emcc --bind lib/c++/src/tree-builder.binder.cpp -s WASM=1 -o lib/js/build/build.js
+    emcc --bind lib/c++/src/tree-builder.binder.cpp -s WASM=1 -o lib/js/core/build.js
     sed -i '20 i Module.ready = new Promise(res => {Module.onRuntimeInitialized = () => {res(Module)}});' lib/js/core/build.js
     echo 'built'
 else
