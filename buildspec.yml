@@ -25,6 +25,7 @@ phases:
             - npm test
             - if [ ! -d "~/.npmrc" ]; then touch ~/.npmrc; fi 
             - echo "//registry.npmjs.org/:_authToken=${npm-token}" >> ~/.npmrc
+            - cat ~/.npmrc
             - npm publish
     post_build:
         commands: 
