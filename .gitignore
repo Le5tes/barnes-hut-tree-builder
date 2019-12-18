@@ -1,6 +1,7 @@
 a.out
 
 lib/js/core/*
+dist
 
 .DS_Store
 node_modules
