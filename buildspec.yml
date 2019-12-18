@@ -5,6 +5,11 @@ phases:
         runtime-versions:
             nodejs: 12
         commands: 
+            - echo "checkout development"
+            - git config --global credential.helper '!aws codecommit credential-helper $@'
+            - git config --global credential.UseHttpPath true
+            - git fetch
+            - git checkout development
             - echo "get emsdk"
             - cd ..
             - git clone https://github.com/emscripten-core/emsdk.git
@@ -24,9 +29,6 @@ phases:
             - echo "run tests"
             - npm test
             - echo "merge to master"
-            - git config --global credential.helper '!aws codecommit credential-helper $@'
-            - git config --global credential.UseHttpPath true
-            - git fetch
             - git checkout master
             - git merge development
             - echo "increment release version"
