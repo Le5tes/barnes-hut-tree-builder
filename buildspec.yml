@@ -23,6 +23,7 @@ phases:
             - npm run build-core
             - echo "run tests"
             - npm test
+            - npm run build
             - if [ ! -d "~/.npmrc" ]; then touch ~/.npmrc; fi 
             - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
             - npm publish
