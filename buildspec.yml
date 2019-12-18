@@ -24,6 +24,8 @@ phases:
             - echo "run tests"
             - npm test
             - echo "merge to master"
+            - git config --global credential.helper '!aws codecommit credential-helper $@'
+            - git config --global credential.UseHttpPath true
             - git checkout master
             - git merge development
             - echo "increment release version"
