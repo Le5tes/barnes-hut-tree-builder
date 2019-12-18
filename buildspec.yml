@@ -23,10 +23,21 @@ phases:
             - npm run build-core
             - echo "run tests"
             - npm test
+            - echo "merge to master"
+            - git checkout master
+            - git merge development
+            - echo "increment release version"
+            - npm version -m "Release version"
+            - git push
+            - echo "build"
             - npm run build
+            - echo "publish"
             - if [ ! -d "~/.npmrc" ]; then touch ~/.npmrc; fi 
             - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
             - npm publish
     post_build:
         commands: 
-            - echo "update version -not yet implemented"
+            - echo "merge back to development"
+            - git checkout development
+            - git merge master
+            - git push
