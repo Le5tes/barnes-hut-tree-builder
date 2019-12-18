@@ -29,6 +29,8 @@ phases:
             - echo "run tests"
             - npm test
             - echo "merge to master"
+            - git status
+            - git log --graph --oneline
             - git checkout master
             - git merge development
             - echo "increment release version"
