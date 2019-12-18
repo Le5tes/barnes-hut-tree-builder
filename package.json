@@ -1,7 +1,7 @@
 {
   "name": "barnes-hut-tree-builder",
-  "version": "0.0.2",
-  "description": "A module to build quadtrees for the barnes-hut algorithm with high performance, implemented using WebAssembly",
+  "version": "0.0.3",
+  "description": "A module to build quadtrees for the barnes-hut algorithm with high performance, implemented using WebAssembly (WIP)",
   "main": "dist/wrapper/main.js",
   "directories": {
     "lib": "lib"
