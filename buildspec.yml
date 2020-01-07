@@ -6,8 +6,8 @@ phases:
             nodejs: 12
         commands: 
             - echo "checkout development"
-            - git config --global credential.helper '!aws codecommit credential-helper $@'
-            - git config --global credential.UseHttpPath true
+            - git config user.name "${GIT_USERNAME}"
+            - git config user.password "${GIT_PASSWORD}"
             - git fetch
             - git checkout development
             - git remote
