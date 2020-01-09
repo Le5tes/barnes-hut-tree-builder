@@ -31,12 +31,11 @@ phases:
             - npm test
             - echo "merge to master"
             - git status
-            - git log --graph --oneline
             - git checkout master
             - git merge development
             - echo "increment release version"
             - npm version -m "Release version"
-            - git push
+            - git push --set-upstream origin master
             - echo "build"
             - npm run build
             - echo "publish"
@@ -48,4 +47,4 @@ phases:
             - echo "merge back to development"
             - git checkout development
             - git merge master
-            - git push
+            - git push --set-upstream origin development
