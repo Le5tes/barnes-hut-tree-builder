@@ -6,8 +6,8 @@ phases:
             nodejs: 12
         commands: 
             - echo "checkout development"
-            - git config user.name "${GIT_USERNAME}"
-            - git config user.password "${GIT_PASSWORD}"
+            - git config --global user.name "${GIT_USERNAME}"
+            - git config --global user.password "${GIT_PASSWORD}"
             - git fetch
             - git checkout development
             - git remote
@@ -35,6 +35,7 @@ phases:
             - git merge development
             - echo "increment release version"
             - npm version -m "Release version"
+            - git remote -v
             - git push --set-upstream origin master
             - echo "build"
             - npm run build
