@@ -1,7 +1,7 @@
 #ifndef TREE_H
 #define TREE_H
 #include "../body-array/body-array.h"
-#include "node-array/node-array.h"
+#include "../node-array/node-array.h"
 
 class Tree {
     public: 
