@@ -1,5 +1,5 @@
-#include "catch.hpp"
-#include "../src/body-array.h"
+#include "../catch.hpp"
+#include "../../src/body-array/body-array.h"
 
 TEST_CASE("should receive an array and allow the retreival of values") {
     double *bodies = new double[9] {5.0, 145.7, 10.0, -45.8, 90.0, 20.0, 7.7, 1.0, 15.0};
