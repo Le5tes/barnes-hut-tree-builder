@@ -1,5 +1,5 @@
 #include "../catch.hpp"
-#include "../../src/node-array/node-array.h"
+#include "../../src/node-array/node-array.cpp"
 
 TEST_CASE("NodeArray.length- should be 4 times the number of bodies by default") {
     NodeArray nodeArray = NodeArray(3);

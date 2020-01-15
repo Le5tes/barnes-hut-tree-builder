@@ -1,4 +1,6 @@
 #include "tree-builder.cpp"
+#include "tree/tree.cpp"
+#include "node-array/node-array.cpp"
 #include <emscripten/bind.h>
 
 using namespace emscripten;

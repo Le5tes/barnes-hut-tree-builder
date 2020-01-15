@@ -3,20 +3,11 @@
 
 class NodeArray {
     public:
-        NodeArray(int numberOfBodies) {
-            _length = numberOfBodies * 4;
-            _nodes = new double[numberOfBodies * 4][12];
-            _nextAvailable = 0;
-        };
+        NodeArray(int numberOfBodies);
 
-        NodeArray(double nodes[][12]): _nodes(nodes) {
-            _length = 10000000;
-            _nextAvailable = 0;
-        };
+        NodeArray(double nodes[][12]);
 
-        ~NodeArray() {
-            delete[] _nodes;
-        };
+        ~NodeArray();
    
         double* getNodes() { return &_nodes[0][0]; };
         
@@ -70,30 +61,14 @@ class NodeArray {
         
         void setSubnode4Addr(int subnode4Addr, int index){ _nodes[index][11] = (double)subnode4Addr; }
 
-        int nextAvailable() {
-            _nextAvailable ++;
-            if(_nextAvailable >= _length) {
-               increaseLength();
-            }
-            return _nextAvailable;
-        };
+        int nextAvailable();
     private:
         double (*_nodes)[12];
         
         int _nextAvailable;
         int _length;
         
-        void increaseLength() {
-            int newLength = _length * 2;
-            double (*newNodes)[12] = new double[newLength][12];
-            
-            memcpy(newNodes, _nodes, sizeof(double) * 12 * _length);
-            
-            delete[] _nodes;
-            _nodes = newNodes;
-            _length = newLength;
-        }
-
+        void increaseLength();
 };
 
 #endif

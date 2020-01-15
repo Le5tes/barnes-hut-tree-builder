@@ -1,6 +1,6 @@
 #include "tree-builder.h"
 #include "body-array/body-array.h"
-#include "tree/tree.cpp"
+#include "tree/tree.h"
 
 double* TreeBuilder::build(double* bodies, int noOfBodies, double width, double cornerX, double cornerY) {
     cleanUp();
