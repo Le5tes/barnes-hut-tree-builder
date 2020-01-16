@@ -105,10 +105,10 @@ TEST_CASE("TreeBuilder.build, when called with two bodies with the same position
     REQUIRE_NOTHROW(treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0));
 }
 
-// TEST_CASE("TreeBuilder.build, when it overruns the array, should not throw errors") {
-//     TreeBuilder treeBuilder;
+TEST_CASE("TreeBuilder.build, when it overruns the array, should not throw errors") {
+    TreeBuilder treeBuilder;
 
-//     double *bodies = new double[6]{10.0, 11.1, 100.0, 10.0, 11.0, 101.0};
+    double *bodies = new double[6]{10.0, 11.1, 100.0, 10.0, 11.0, 101.0};
 
-//     REQUIRE_NOTHROW(treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0));
-// }
+    REQUIRE_NOTHROW(treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0));
+}
