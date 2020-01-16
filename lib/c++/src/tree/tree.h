@@ -5,9 +5,11 @@
 
 class Tree {
     public: 
-        Tree(double nodes[][12], BodyArray &bodies) : nodeArray(nodes), bodies(bodies) 
-        {
-        }
+        Tree(double nodes[][12], BodyArray &bodies) : nodeArray(nodes), bodies(bodies) {};
+        
+        Tree(int noOfBodies, BodyArray &bodies) : nodeArray(noOfBodies), bodies(bodies) {};
+        
+        double* getNodes() { return nodeArray.getNodes(); };
     
         void addBody(int index, int bodyAddr);
         
