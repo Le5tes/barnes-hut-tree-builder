@@ -4,6 +4,14 @@ if which emcc ; then
     fi
 
     emcc --bind lib/c++/src/tree-builder.binder.cpp -s ALLOW_MEMORY_GROWTH=1 -s WASM=1 -o lib/js/core/build.js
+    BUILD_STATUS=$?
+    
+    if [ $BUILD_STATUS != '0' ]
+    then 
+        echo 'build failed'
+        exit 1
+    fi
+    
     sed -i '20 i Module.ready = new Promise(res => {Module.onRuntimeInitialized = () => {res(Module)}});' lib/js/core/build.js
     echo 'built'
 else
