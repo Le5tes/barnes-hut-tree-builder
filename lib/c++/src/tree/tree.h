@@ -10,6 +10,8 @@ class Tree {
         Tree(int noOfBodies, BodyArray &bodies) : nodeArray(noOfBodies), bodies(bodies) {};
         
         double* getNodes() { return nodeArray.getNodes(); };
+        
+        int getLength() { return nodeArray.getLength(); };
     
         void addBody(int index, int bodyAddr);
         

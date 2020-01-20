@@ -18,14 +18,10 @@ class TreeBuilder {
 
         double *build(double* bodies, int noOfBodies, double width, double cornerX, double cornerY);
 
-        int getTreeLength() {
-            return treeLength;
-        }
+        int getTreeLength();
 
     private:
         Tree *tree;
-        
-        int treeLength;
         
         void addBody(double nodeAddr, double bodyAddr);
 };

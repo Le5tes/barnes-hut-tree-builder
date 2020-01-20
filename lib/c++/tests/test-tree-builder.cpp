@@ -112,3 +112,27 @@ TEST_CASE("TreeBuilder.build, when it overruns the array, should not throw error
 
     REQUIRE_NOTHROW(treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0));
 }
+
+TEST_CASE("TreeBuilder.length, should return the length of the nodeArray") {
+    TreeBuilder treeBuilder;
+    
+    SECTION("when tree is not yet initialised - should return 0") {
+        REQUIRE(treeBuilder.getTreeLength() == 0);
+    }
+    
+    SECTION("after build - no array extension") {
+        double *bodies = new double[3]{10.0, 11.1, 100.0};
+
+        treeBuilder.build(bodies, 1, 3000.0, -1500.0, -1500.0);
+
+        REQUIRE(treeBuilder.getTreeLength() == 4);
+    }
+    
+    SECTION("after build - with array extension") {
+        double *bodies = new double[6]{10.0, 11.1, 100.0, 10.0, 11.0, 101.0};
+
+        treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0);
+
+        REQUIRE(treeBuilder.getTreeLength() == 64);
+    }
+}

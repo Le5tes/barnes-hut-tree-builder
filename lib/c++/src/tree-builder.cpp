@@ -17,6 +17,13 @@ double* TreeBuilder::build(double* bodies, int noOfBodies, double width, double 
     return tree->getNodes();
 }
 
+int TreeBuilder::getTreeLength() {
+    if (tree == nullptr){
+        return 0;
+    }
+    return tree->getLength();
+}
+
 TreeBuilder getTreeBuilder() {
     TreeBuilder treeBuilder;
     return treeBuilder;
