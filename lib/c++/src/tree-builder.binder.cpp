@@ -18,5 +18,6 @@ EMSCRIPTEN_BINDINGS(my_module) {
 
     class_<TreeBuilder>("TreeBuilder")
     .constructor<>()
-    .function("build", select_overload<doublePtr_t(doublePtr_t, int, double, double, double)>(&TreeBuilder::build), allow_raw_pointers());
+    .function("build", select_overload<doublePtr_t(doublePtr_t, int, double, double, double)>(&TreeBuilder::build), allow_raw_pointers())
+    .function("getTreeLength", &TreeBuilder::getTreeLength);
 }
