@@ -30,5 +30,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Le5tes/barnes-hut-tree-builder.git"
+  },
+  "dependencies": {
+    "core-js": "^3.6.4"
   }
 }

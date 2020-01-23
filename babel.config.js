@@ -1,13 +1,12 @@
-module.exports = api => {
-  const targets = api.env('test') ? { node: 'current'} : 'node > 8, > 0.25%, not dead';
-  return {
+module.exports = {
     presets: [
       [
         '@babel/preset-env',
         {
-          targets: targets
+          useBuiltIns: 'usage',
+          corejs: 3,
+          targets: 'node > 8, > 0.25%, not dead'
         }
       ]
     ]
-  }
 };
