@@ -3,7 +3,7 @@ if which emcc ; then
       mkdir lib/js/core
     fi
 
-    emcc --bind lib/c++/src/tree-builder.binder.cpp --pre-js lib/js/pre-build/pre-build.js -s ALLOW_MEMORY_GROWTH=1 -s ENVIRONMENT=node -Os -s WASM=1 -o lib/js/core/build.js
+    emcc --bind lib/c++/src/tree-builder.binder.cpp --pre-js lib/js/pre-build/pre-build.js -s ALLOW_MEMORY_GROWTH=1 -Os -s WASM=1 -o lib/js/core/build.js
     BUILD_STATUS=$?
     
     if [ $BUILD_STATUS != '0' ]
