@@ -62,6 +62,8 @@ class NodeArray {
         void setSubnode4Addr(int subnode4Addr, int index){ _nodes[index][11] = (double)subnode4Addr; }
 
         int nextAvailable();
+        
+        void reset();
     private:
         double (*_nodes)[12];
         

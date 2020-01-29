@@ -34,3 +34,7 @@ void NodeArray::increaseLength() {
     _nodes = newNodes;
     _length = newLength;
 };
+
+void NodeArray::reset() {
+    _nextAvailable = 0;    
+}

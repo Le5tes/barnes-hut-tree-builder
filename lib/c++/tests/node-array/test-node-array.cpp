@@ -26,3 +26,15 @@ TEST_CASE("NodeArray.nextAvailable") {
         REQUIRE_NOTHROW(nodeArray.mass(4));
     }
 }
+
+TEST_CASE("NodeArray.reset should reset the nextAvailable") {
+    NodeArray nodeArray = NodeArray(1);
+     
+    nodeArray.nextAvailable();
+    nodeArray.nextAvailable();
+    nodeArray.nextAvailable();
+    
+    nodeArray.reset();
+    
+    REQUIRE(nodeArray.nextAvailable() == 1);
+}
