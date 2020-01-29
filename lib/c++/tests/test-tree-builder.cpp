@@ -136,3 +136,13 @@ TEST_CASE("TreeBuilder.length, should return the length of the nodeArray") {
         REQUIRE(treeBuilder.getTreeLength() == 64);
     }
 }
+
+TEST_CASE("TreeBuilder.build, when called multiple times should overwrite the array rather than extending it") {
+    TreeBuilder treeBuilder;
+    double *bodies = new double[6]{10.0, 11.0, 100.0, -10.0, 25.0, 100.0};
+    
+    treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0);
+    treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0);
+    
+    REQUIRE(treeBuilder.getTreeLength() == 8);
+}

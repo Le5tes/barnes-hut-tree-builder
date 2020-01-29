@@ -12,6 +12,8 @@ class Tree {
         double* getNodes() { return nodeArray.getNodes(); };
         
         int getLength() { return nodeArray.getLength(); };
+        
+        void reset() { nodeArray.reset(); };
     
         void addBody(int index, int bodyAddr);
         

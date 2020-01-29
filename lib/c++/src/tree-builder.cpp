@@ -7,6 +7,8 @@ double* TreeBuilder::build(double* bodies, int noOfBodies, double width, double 
 
     if (tree == nullptr){
         tree = new Tree(noOfBodies, bodyArray);
+    } else {
+        tree->reset();
     }
     tree->setupNode(0, -1, width, cornerX, cornerY);
     
