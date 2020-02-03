@@ -12,7 +12,6 @@ void Tree::addBody(int index, int body) {
                 createIdenticalSubnodes(index);
                 addBody(nodeArray.subnode2Addr(index), nodeArray.bodyAddr(index));
             } else {
-                // createSubnodes(index);
                 addToCorrectSubnode(nodeArray.bodyAddr(index), index);
             }
             nodeArray.setBodyAddr(-1, index);
@@ -33,31 +32,39 @@ void Tree::addToCorrectSubnode(int body, int index) {
     const double _cornerX = nodeArray.cornerX(index);
     const double _cornerY = nodeArray.cornerY(index);
     
-    if (correctSubnode == 0) {
-        if (nodeArray.subnode1Addr(index) == -1) {
-            nodeArray.setSubnode1Addr(nodeArray.nextAvailable(), index);
-            setupNode(nodeArray.subnode1Addr(index), index, _width, _cornerX, _cornerY);
-        }
+    if (twoIdenticalSubnodes(index)) {
         addBody(nodeArray.subnode1Addr(index), body);
-    } else if (correctSubnode == 1) {
-         if (nodeArray.subnode2Addr(index) == -1) {
-            nodeArray.setSubnode2Addr(nodeArray.nextAvailable(), index);
-            setupNode(nodeArray.subnode2Addr(index), index, _width, _cornerX + _width, _cornerY);
+    } else {
+        if (correctSubnode == 0) {
+            if (nodeArray.subnode1Addr(index) == -1) {
+                nodeArray.setSubnode1Addr(nodeArray.nextAvailable(), index);
+                setupNode(nodeArray.subnode1Addr(index), index, _width, _cornerX, _cornerY);
+            }
+            addBody(nodeArray.subnode1Addr(index), body);
+        } else if (correctSubnode == 1) {
+             if (nodeArray.subnode2Addr(index) == -1) {
+                nodeArray.setSubnode2Addr(nodeArray.nextAvailable(), index);
+                setupNode(nodeArray.subnode2Addr(index), index, _width, _cornerX + _width, _cornerY);
+            }
+            addBody(nodeArray.subnode2Addr(index), body);
+        } else if (correctSubnode == 2) {
+            if (nodeArray.subnode3Addr(index) == -1) {
+                nodeArray.setSubnode3Addr(nodeArray.nextAvailable(), index);
+                setupNode(nodeArray.subnode3Addr(index), index, _width, _cornerX, _cornerY + _width);
+            }
+            addBody(nodeArray.subnode3Addr(index), body);
+        } else if (correctSubnode == 3) {
+            if (nodeArray.subnode4Addr(index) == -1) {
+                nodeArray.setSubnode4Addr(nodeArray.nextAvailable(), index);
+                setupNode(nodeArray.subnode4Addr(index), index, _width, _cornerX + _width, _cornerY + _width);
+            }
+            addBody(nodeArray.subnode4Addr(index), body);
         }
-        addBody(nodeArray.subnode2Addr(index), body);
-    } else if (correctSubnode == 2) {
-        if (nodeArray.subnode3Addr(index) == -1) {
-            nodeArray.setSubnode3Addr(nodeArray.nextAvailable(), index);
-            setupNode(nodeArray.subnode3Addr(index), index, _width, _cornerX, _cornerY + _width);
-        }
-        addBody(nodeArray.subnode3Addr(index), body);
-    } else if (correctSubnode == 3) {
-        if (nodeArray.subnode4Addr(index) == -1) {
-            nodeArray.setSubnode4Addr(nodeArray.nextAvailable(), index);
-            setupNode(nodeArray.subnode4Addr(index), index, _width, _cornerX + _width, _cornerY + _width);
-        }
-        addBody(nodeArray.subnode4Addr(index), body);
     }
+}
+
+bool Tree::twoIdenticalSubnodes(int index) {
+    return nodeArray.width(index) == nodeArray.width(nodeArray.subnode1Addr(index));
 }
 
 int Tree::getCorrectSubnode(int body, int index) {
@@ -78,13 +85,6 @@ int Tree::getCorrectSubnode(int body, int index) {
             return 3;
         }
     }
-}
-
-bool Tree::isInsideNode(int nodeIndex, int bodyIndex) {
-    return bodies.posX(bodyIndex) >= nodeArray.cornerX(nodeIndex)
-       && bodies.posX(bodyIndex) < nodeArray.cornerX(nodeIndex) + nodeArray.width(nodeIndex) 
-       && bodies.posY(bodyIndex) >= nodeArray.cornerY(nodeIndex)
-       && bodies.posY(bodyIndex) < nodeArray.cornerY(nodeIndex) + nodeArray.width(nodeIndex) ;
 }
 
 void Tree::calculateCentreOfMass(int index) {
@@ -113,43 +113,25 @@ void Tree::calculateCentreOfMass(int index) {
     nodeArray.setPosY(positionY, index);
 }
 
-    double Tree::massIfExists(int address) {
-        if (address == -1) {
-            return 0;
-        }
-        return nodeArray.mass(address);
-    };
-    
-    double Tree::posXIfExists(int address) {
-         if (address == -1) {
-            return 0;
-        }
-        return nodeArray.posX(address);
-    };
-    
-    double Tree::posYIfExists(int address) {
-         if (address == -1) {
-            return 0;
-        }
-        return nodeArray.posY(address);
-    };
+double Tree::massIfExists(int address) {
+    if (address == -1) {
+        return 0;
+    }
+    return nodeArray.mass(address);
+};
 
-void Tree::createSubnodes(int index) {
-    const double _width = nodeArray.width(index) / 2;
-    const double _cornerX = nodeArray.cornerX(index);
-    const double _cornerY = nodeArray.cornerY(index);
+double Tree::posXIfExists(int address) {
+     if (address == -1) {
+        return 0;
+    }
+    return nodeArray.posX(address);
+};
 
-    nodeArray.setSubnode1Addr(nodeArray.nextAvailable(), index);
-    setupNode(nodeArray.subnode1Addr(index), index, _width, _cornerX, _cornerY);
-    
-    nodeArray.setSubnode2Addr(nodeArray.nextAvailable(), index);
-    setupNode(nodeArray.subnode2Addr(index), index, _width, _cornerX + _width, _cornerY);
-    
-    nodeArray.setSubnode3Addr(nodeArray.nextAvailable(), index);
-    setupNode(nodeArray.subnode3Addr(index), index, _width, _cornerX, _cornerY + _width);
-    
-    nodeArray.setSubnode4Addr(nodeArray.nextAvailable(), index);
-    setupNode(nodeArray.subnode4Addr(index), index, _width, _cornerX + _width, _cornerY + _width);
+double Tree::posYIfExists(int address) {
+     if (address == -1) {
+        return 0;
+    }
+    return nodeArray.posY(address);
 };
 
 void Tree::createIdenticalSubnodes(int index) {
@@ -162,12 +144,6 @@ void Tree::createIdenticalSubnodes(int index) {
 
     nodeArray.setSubnode2Addr(nodeArray.nextAvailable(), index);
     setupNode(nodeArray.subnode2Addr(index), index, _width, _cornerX, _cornerY);
-    
-    nodeArray.setSubnode3Addr(nodeArray.nextAvailable(), index);
-    setupNode(nodeArray.subnode3Addr(index), index, _width, _cornerX, _cornerY);
-    
-    nodeArray.setSubnode4Addr(nodeArray.nextAvailable(), index);
-    setupNode(nodeArray.subnode4Addr(index), index, _width, _cornerX, _cornerY);
 };
 
 void Tree::setupNode(int index, int parentIndex, double _width, double cX, double cY) {
