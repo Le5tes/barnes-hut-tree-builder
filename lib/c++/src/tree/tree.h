@@ -25,12 +25,16 @@ class Tree {
         BodyArray &bodies;
         
         bool isSamePosition(int body1, int body2); 
+        int getCorrectSubnode(int body, int index);
         void addToCorrectSubnode(int body, int index);
         bool isInsideNode( int nodeIndex, int bodyIndex);
         bool hasNoSubnodes(int index);
         void createSubnodes(int index);
         void createIdenticalSubnodes(int index);
         void calculateCentreOfMass(int index);
+        double massIfExists(int address);
+        double posXIfExists(int address);
+        double posYIfExists(int address);
 };
 
 #endif

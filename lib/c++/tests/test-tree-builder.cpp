@@ -40,7 +40,7 @@ TEST_CASE("TreeBuilder.build, when called with a single body, should return an a
     }
 }
 
-TEST_CASE("TreeBuilder.build, when called with two bodies, should return an array with five nodes") {
+TEST_CASE("TreeBuilder.build, when called with two bodies, should return an array with three nodes") {
     TreeBuilder treeBuilder;
 
     double *bodies = new double[6]{10.0, 11.0, 100.0, -10.0, 25.0, 100.0};
@@ -51,11 +51,11 @@ TEST_CASE("TreeBuilder.build, when called with two bodies, should return an arra
             REQUIRE(*(result + 6) == -1.0);
         }
         
-        SECTION("Has 4 children") {
-            REQUIRE(*(result + 8) == 1.0);
-            REQUIRE(*(result + 9) == 2.0);
-            REQUIRE(*(result + 10) == 3.0);
-            REQUIRE(*(result + 11) == 4.0);
+        SECTION("Has 2 children") {
+            REQUIRE(*(result + 8) == -1.0);
+            REQUIRE(*(result + 9) == -1.0);
+            REQUIRE(*(result + 10) == 2.0);
+            REQUIRE(*(result + 11) == 1.0);
         } 
     
         SECTION("has no body attached to it") {
@@ -79,20 +79,12 @@ TEST_CASE("TreeBuilder.build, when called with two bodies, should return an arra
     }
     
     SECTION("child nodes") {
-        SECTION("first child should have no body") {
-            REQUIRE(*(result+19) == -1.0);
-        }
-        
-        SECTION("second child should have no body") {
-            REQUIRE(*(result+31) == -1.0);
-        }
-        
         SECTION("third child should have the second body") {
-            REQUIRE(*(result+43) == 1.0);
+            REQUIRE(*(result+19) == 0.0);
         }
         
         SECTION("fourth child should have the first body") {
-            REQUIRE(*(result+55) == 0.0);
+            REQUIRE(*(result+31) == 1.0);
         }
     }
 }
@@ -133,7 +125,7 @@ TEST_CASE("TreeBuilder.length, should return the length of the nodeArray") {
 
         treeBuilder.build(bodies, 2, 3000.0, -1500.0, -1500.0);
 
-        REQUIRE(treeBuilder.getTreeLength() == 64);
+        REQUIRE(treeBuilder.getTreeLength() == 32);
     }
 }
 
