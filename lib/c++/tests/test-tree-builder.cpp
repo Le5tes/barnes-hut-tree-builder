@@ -138,3 +138,27 @@ TEST_CASE("TreeBuilder.build, when called multiple times should overwrite the ar
     
     REQUIRE(treeBuilder.getTreeLength() == 8);
 }
+
+TEST_CASE("TreeBuilder.build, when called with a body outside of the bounds, should not include it in the tree") {
+    TreeBuilder treeBuilder;
+    double *bodies = new double[6]{10.0,11.0,100.0,10.0,155.0,100.0};
+
+    double *result = treeBuilder.build(bodies, 2, 300.0, -150.0, -150.0);
+
+    REQUIRE(result);
+    REQUIRE(*result == 10.0);
+    REQUIRE(*(result + 1) == 11.0);
+    REQUIRE(*(result + 2) == 100.0);
+    REQUIRE(*(result + 7) == 0.0);
+    REQUIRE(*(result + 8) == -1.0);
+    REQUIRE(*(result + 9) == -1.0);
+    REQUIRE(*(result + 10) == -1.0);
+    REQUIRE(*(result + 11) == -1.0);
+}
+
+TEST_CASE("TreeBuilder.build, when called with two body outside of the bounds, should not throw errors") {
+    TreeBuilder treeBuilder;
+    double *bodies = new double[9]{10.0,11.0,100.0,10.0,155.0,100.0,10.0,156.0,100.0};
+
+    REQUIRE_NOTHROW(treeBuilder.build(bodies, 3, 300.0, -150.0, -150.0));
+}
