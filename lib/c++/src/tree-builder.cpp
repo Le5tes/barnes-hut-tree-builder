@@ -3,7 +3,7 @@
 #include "tree/tree.h"
 
 double* TreeBuilder::build(double* bodies, int noOfBodies, double width, double cornerX, double cornerY) {
-    BodyArray bodyArray = BodyArray(bodies);
+    BodyArray bodyArray {bodies};
 
     if (tree == nullptr){
         tree = new Tree(noOfBodies, bodyArray);
