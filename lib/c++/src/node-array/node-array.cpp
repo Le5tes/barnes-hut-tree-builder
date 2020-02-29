@@ -1,15 +1,9 @@
 #include "node-array.h"
 #include <cstring>
 
-NodeArray::NodeArray(int numberOfBodies) {
+NodeArray::NodeArray(int numberOfBodies): NodeArray() {
     _length = numberOfBodies * 4;
     _nodes = new double[numberOfBodies * 4][12];
-    _nextAvailable = 0;
-};
-
-NodeArray::NodeArray(double nodes[][12]): _nodes(nodes) {
-    _length = 10000000;
-    _nextAvailable = 0;
 };
 
 NodeArray::~NodeArray() {
