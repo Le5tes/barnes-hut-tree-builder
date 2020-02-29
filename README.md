@@ -20,76 +20,58 @@ import { BarnesHutTreeBuilder } from 'barnes-hut-tree-builder';
     
     const bodies = [
         {mass: 100, positionX: 50, positionY: 90},
-        {mass: 100.01, positionX: 98, positionY: 91},
-        {mass: 200, positionX: 309.45, positionY: 239.01111}
+        {mass: 100.01, positionX: 298, positionY: 91},
+        {mass: 200, positionX: 709.45, positionY: 539.01111}
     ]
     
     return treeBuilder.build(bodies, 1000, 0, 0)
 })()
 /* Resolves to:
 { 
-  positionX: 191.72265693357664,
-  positionY: 164.75371115722106,
-  mass: 400.01,
-  width: 1000,
-  cornerX: 0,
-  cornerY: 0,
-  body: undefined,
-  subnodes: [{
-    positionX: 191.72265693357664,
-    positionY: 164.75371115722106,
+    positionX: 441.7214069648259,
+    positionY: 314.74996125096874,
     mass: 400.01,
-    width: 500,
+    width: 1000,
     cornerX: 0,
     cornerY: 0,
     body: undefined,
-    subnodes: [{ 
-      positionX: 74.001199940003,
-      positionY: 90.50002499875006,
-      mass: 200.01,
-      width: 250,
-      cornerX: 0,
-      cornerY: 0,
-      body: undefined,
-      subnodes: [{ 
-        positionX: 74.001199940003,
+    subnodes: [{
+        positionX: 174.00619969001553,
         positionY: 90.50002499875006,
         mass: 200.01,
-        width: 125,
+        width: 500,
         cornerX: 0,
         cornerY: 0,
         body: undefined,
         subnodes: [{
-          positionX: 50,
-          positionY: 90,
-          mass: 100,
-          width: 62.5,
-          cornerX: 0,
-          cornerY: 62.5,
-          body: { mass: 100, positionX: 50, positionY: 90 },
-          subnodes: []
+            positionX: 50,
+            positionY: 90,
+            mass: 100,
+            width: 250,
+            cornerX: 0,
+            cornerY: 0,
+            body: { mass: 100, positionX: 50, positionY: 90 },
+            subnodes: [] 
         }, { 
-          positionX: 98,
-          positionY: 91,
-          mass: 100.01,
-          width: 62.5,
-          cornerX: 62.5,
-          cornerY: 62.5,
-          body: { mass: 100.01, positionX: 98, positionY: 91 },
-          subnodes: [] 
+            positionX: 298,
+            positionY: 91,
+            mass: 100.01,
+            width: 250,
+            cornerX: 250,
+            cornerY: 0,
+            body: { mass: 100.01, positionX: 298, positionY: 91 },
+            subnodes: [] 
         }] 
-      }] 
     }, { 
-      positionX: 309.45,
-      positionY: 239.01111,
-      mass: 200,
-      width: 250,
-      cornerX: 250,
-      cornerY: 0,
-      body: { mass: 200, positionX: 309.45, positionY: 239.01111 },
-      subnodes: [] 
+        positionX: 709.45,
+        positionY: 539.01111,
+        mass: 200,
+        width: 500,
+        cornerX: 500,
+        cornerY: 500,
+        body: [Object],
+        subnodes: [] 
     }] 
-  }]
 }
 */
 ```
