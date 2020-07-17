@@ -1,6 +1,6 @@
 {
   "name": "@gravity-simulator/barnes-hut-tree-builder",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "A module to build quadtrees for the barnes-hut algorithm with high performance, implemented using WebAssembly (WIP)",
   "main": "dist/wrapper/main.js",
   "directories": {
