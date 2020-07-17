@@ -42,7 +42,7 @@ phases:
             - echo "publish"
             - if [ ! -d "~/.npmrc" ]; then touch ~/.npmrc; fi 
             - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
-            - npm publish
+            - npm publish --access public
     post_build:
         commands: 
             - echo "merge back to development"
